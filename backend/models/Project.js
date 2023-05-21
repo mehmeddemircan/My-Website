@@ -23,6 +23,11 @@ var projectSchema = new mongoose.Schema({
           },
         },
     ],
+    features : [
+        {
+            type : String,
+        }
+    ],
     technologies:[
         {
             type : ObjectId,
