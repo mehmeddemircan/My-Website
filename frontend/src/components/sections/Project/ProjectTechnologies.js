@@ -1,20 +1,20 @@
 import { Space, Tag } from 'antd'
 import React, { Fragment } from 'react'
+import { useSelector } from 'react-redux'
 
 const ProjectTechnologies = () => {
+
+  const getProjectDetails = useSelector((state) => state.project.getProjectDetails)
+
   return (
     <Fragment>
          <div>
               <h5 className="my-3">Teknolojiler</h5>
               <Space size={[0, 8]} wrap>
-                <Tag color="#f50">#f50</Tag>
-                <Tag color="#2db7f5">#2db7f5</Tag>
-                <Tag color="#87d068">#87d068</Tag>
-                <Tag color="#108ee9">#108ee9</Tag>
-                <Tag color="#f50">#f50</Tag>
-                <Tag color="#2db7f5">#2db7f5</Tag>
-                <Tag color="#87d068">#87d068</Tag>
-                <Tag color="#108ee9">#108ee9</Tag>
+                {getProjectDetails.project.technologies.map((technology) => (
+                
+                   <Tag color="#108ee9">{technology.name}</Tag>
+                ))}
               </Space>
             </div>
     </Fragment>
