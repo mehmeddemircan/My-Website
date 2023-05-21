@@ -93,6 +93,7 @@ exports.updateProject = catchAsyncErrors(async (req, res) => {
     project.description  = req.body.description || project.description
     project.thumbnailImage = req.body.thumbnailImage || project.thumbnailImage
     project.webUrl = req.body.webUrl || project.webUrl
+    project.features  = req.body.features || project.features
 
        // Upload new images to Cloudinary if provided
        if (req.body.images && req.body.images.length > 0) {
