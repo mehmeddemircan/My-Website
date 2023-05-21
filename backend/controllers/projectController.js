@@ -1,10 +1,23 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const Project = require("../models/Project");
 const TechFeature = require("../models/TechFeature");
+const cloudinary = require("cloudinary");
 
 exports.createProject = catchAsyncErrors(async (req, res) => {
   try {
-    const newProject = new Project(req.body);
+    const {title,description } = req.body;
+
+    let thumbnailImage ; 
+    if (req.body.thumbnailImage) {
+      const result = await cloudinary.uploader.upload(req.body.thumbnailImage);
+      thumbnailImage = result.secure_url;
+    }
+
+    const newProject = new Project({
+      title,
+      description,
+      thumbnailImage
+    })
 
     await newProject.save();
 
@@ -24,7 +37,7 @@ exports.getProjectsWithPage = catchAsyncErrors(async (req, res) => {
 
     const totalProjects = await Project.countDocuments();
 
-    const allProjects = await Project.find().skip(startIndex).limit(limit);
+    const allProjects = await Project.find().select("title description thumbnailImage createdAt updatedAt").skip(startIndex).limit(limit);
 
     res.status(200).json({
       totalProjects,
@@ -57,14 +70,38 @@ exports.deleteProject = catchAsyncErrors(async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
+const uploadImagesToCloudinary = async (images) => {
+  const uploadedImages = await Promise.all(
+    images.map(async (image) => {
+      const result = await cloudinary.uploader.upload(image);
+      return { public_id: result.public_id, url: result.secure_url };
+    })
+  );
+  return uploadedImages;
+};
 exports.updateProject = catchAsyncErrors(async (req, res) => {
   try {
-    await Project.findByIdAndUpdate(
-      req.params.projectId,
-      { $set: req.body },
-      { new: true }
-    );
+    
+    const project = await Project.findById(req.params.projectId)
+
+    if (!project) {
+      res.status(404).json({message : "Proje bulunamadı "})
+      return 
+    }
+
+    project.title = req.body.title || project.title
+    project.description  = req.body.description || project.description
+    project.thumbnailImage = req.body.thumbnailImage || project.thumbnailImage
+    project.webUrl = req.body.webUrl || project.webUrl
+
+       // Upload new images to Cloudinary if provided
+       if (req.body.images && req.body.images.length > 0) {
+        const uploadedImages = await uploadImagesToCloudinary(req.body.images);
+        project.images = uploadedImages;
+      }
+
+      await project.save()
+
     res.status(200).json({ message: "Başarılı şekilde proje güncellendi " });
   } catch (error) {
     res.status(500).json({ error: error.message });
