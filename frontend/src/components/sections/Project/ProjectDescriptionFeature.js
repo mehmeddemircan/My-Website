@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react'
+import { useSelector } from 'react-redux'
 
 const ProjectDescriptionFeature = () => {
+
+  const getProjectDetails = useSelector((state) => state.project.getProjectDetails)
+
   return (
    <Fragment>
      <div className="border-b border-gray-200 pb-6">
@@ -22,11 +26,12 @@ const ProjectDescriptionFeature = () => {
               </h1>
               <div className='mt-4'>
                 <ul className='ms-4 list-disc text-sm text-gray-500 dark:text-gray-400 '>
-                    <li className='my-2'>dassdadsadsa</li>
-                    <li className='my-2'>dassdadsadsa</li>
-                    <li className='my-2'>dassdadsadsa</li>
-                    <li className='my-2'>dassdadsadsa</li>
-                    <li className='my-2'>dassdadsadsa</li>
+                    {
+                      getProjectDetails.project.features.map((feature) => (
+                        <li className='my-2'>{feature}</li>
+                      
+                      ))
+                    }
                   
                 </ul>
             </div>
