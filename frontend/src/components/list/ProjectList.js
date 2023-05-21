@@ -3,6 +3,7 @@ import ProjectCard from '../cards/ProjectCard'
 import ProjectPagination from '../pagination/ProjectPagination'
 
 const ProjectList = () => {
+  // map ile projeeler gezilecek 
   return (
     <div className='container mx-auto'>
          <h1 className='text-xl my-3 text-center'>Projects</h1>
