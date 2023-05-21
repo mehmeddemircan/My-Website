@@ -1,5 +1,6 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const Project = require("../models/Project");
+const TechFeature = require("../models/TechFeature");
 
 exports.createProject = catchAsyncErrors(async (req, res) => {
   try {
@@ -13,42 +14,40 @@ exports.createProject = catchAsyncErrors(async (req, res) => {
   }
 });
 
-exports.getProjectsWithPage = catchAsyncErrors(async(req,res) => {
-    try {
-        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter, default to 1 if not provided
-        const limit = parseInt(req.query.limit) || 4; // Get the limit from the query parameter, default to 10 if not provided
-    
-        const startIndex = (page - 1) * limit;
-        const endIndex = page * limit;
-    
-        const totalProjects = await Project.countDocuments();
-    
-        const allProjects = await Project.find()
-          .skip(startIndex)
-          .limit(limit);
-    
-        res.status(200).json({
-          totalProjects,
-          currentPage: page,
-          totalPages: Math.ceil(totalProjects / limit),
-          results: allProjects,
-        });
-    } catch (error) {
-        res.status(500).json({error : error.message})
-    }
-})
+exports.getProjectsWithPage = catchAsyncErrors(async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter, default to 1 if not provided
+    const limit = parseInt(req.query.limit) || 4; // Get the limit from the query parameter, default to 10 if not provided
 
-exports.getProjectDetails = catchAsyncErrors(async(req,res) => {
-    try {
-        
-        const projectDetails = await Project.findById(req.params.projectId)
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
 
-        res.status(200).json(projectDetails)
+    const totalProjects = await Project.countDocuments();
 
-    } catch (error) {
-        res.status(500).json({error : error.message})
-    }
-})
+    const allProjects = await Project.find().skip(startIndex).limit(limit);
+
+    res.status(200).json({
+      totalProjects,
+      currentPage: page,
+      totalPages: Math.ceil(totalProjects / limit),
+      results: allProjects,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+exports.getProjectDetails = catchAsyncErrors(async (req, res) => {
+  try {
+    const projectDetails = await Project.findById(
+      req.params.projectId
+    ).populate("technologies", "name");
+
+    res.status(200).json(projectDetails);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 exports.deleteProject = catchAsyncErrors(async (req, res) => {
   try {
@@ -71,3 +70,68 @@ exports.updateProject = catchAsyncErrors(async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+exports.addTechnologyToProject = async (req, res) => {
+  try {
+    const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
+    const techId = req.body.techId; // Assuming you have the technology ID in the request body
+
+    // Check if the project exists
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    // Check if the technology exists
+    const tech = await TechFeature.findById(techId);
+    if (!tech) {
+      return res.status(404).json({ error: "Technology not found" });
+    }
+
+    // Push the technology ID into the project's technologies array
+    project.technologies.push(techId);
+
+    // Save the updated project
+    await project.save();
+
+    res
+      .status(200)
+      .json({ message: "Technology added to the project successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.removeTechFeatureFromProject = async (req, res) => {
+  try {
+    const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
+    const techId = req.params.techId; // Assuming you have the tech feature ID in the request parameters
+
+    // Check if the project exists
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    // Check if the tech feature exists
+    const techFeature = await TechFeature.findById(techId);
+    if (!techFeature) {
+      return res.status(404).json({ error: "Tech feature not found" });
+    }
+
+    // Remove the tech feature ID from the project's technologies array
+    const index = project.technologies.indexOf(techId);
+    if (index !== -1) {
+      project.technologies.splice(index, 1);
+    }
+
+    // Save the updated project
+    await project.save();
+
+    res
+      .status(200)
+      .json({ message: "Tech feature removed from the project successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
