@@ -16,7 +16,8 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
 import LanguageModal from "../modal/LanguageModal";
-
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar } from "antd";
 const products = [
   {
     name: "Analytics",
@@ -78,12 +79,8 @@ const MainHeader = () => {
         >
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">My Website</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <Avatar size={32} icon={<UserOutlined />} />
+              <span className="ms-3">My Website</span>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -201,13 +198,9 @@ const MainHeader = () => {
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
+              <a href="/" className="-m-1.5 p-1.5">
+              <Avatar size={32} icon={<UserOutlined />} />
+              <span className="ms-3">My Website</span>
               </a>
               <button
                 type="button"
