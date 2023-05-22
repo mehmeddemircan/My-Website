@@ -29,10 +29,9 @@ var projectSchema = new mongoose.Schema({
         }
     ],
     technologies:[
-        {
-            type : ObjectId,
-            ref : 'TechFeature'
-        }
+       {
+         type : String
+       }
     ],
     webUrl : {
         type : String
