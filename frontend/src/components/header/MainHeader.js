@@ -80,7 +80,7 @@ const MainHeader = () => {
         >
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
-              <Avatar size={32} icon={<UserOutlined />} />
+              {/* <Avatar size={32} icon={<UserOutlined />} /> */}
               <span className="ms-3">My Website</span>
             </a>
           </div>
