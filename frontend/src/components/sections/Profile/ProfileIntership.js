@@ -15,12 +15,14 @@ const ProfileIntership = () => {
                
                 <div className='mt-3' >
                     <ul className='ms-4 list-disc'>
-                        <li className='list-item mt-2'>aaa</li>
-                        <li className='list-item mt-2'>aaa</li>
-                        <li className='list-item mt-2'>aaa</li>
-                        <li className='list-item mt-2'>aaa</li>
-                        <li className='list-item mt-2'>aaa</li>
-                        <li className='list-item mt-2'>aaa</li>
+                        <li className='list-item mt-2'>ASP.Net Core alanında kendimi geliştirdim </li>
+                        <li className='list-item mt-2'>PostgreSQL database management kısmını öğrendim</li>
+                        <li className='list-item mt-2'>Draw.io da proje taslağı hazırladım</li>
+                        <li className='list-item mt-2'>Obiletin otobüs kısmının ,anasayfa ,sefer listesi , sefer rezervasyon , ödeme sayfaların desiglarını react ile yaptım </li>
+                        <li className='list-item mt-2'>POSTMAN'de istekleri bir collection üzerinde kaydettim </li>
+                        <li className='list-item mt-2'>SOAP servislerini öğrendim </li>
+                        <li className='list-item mt-2'>Yapılan rezervasyonları database de kaydettim  </li>
+                        <li className='list-item mt-2'>Redux state management tool'unu kullanarak stateleri isledim   </li>
                     </ul>
                     </div>
                

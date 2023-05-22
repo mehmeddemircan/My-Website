@@ -14,11 +14,23 @@ const ProfileSidebar = () => {
            
           </div>
           <div class="space-y-1 font-medium dark:text-white">
-              <p>Jese Leos</p>
+              <p>Mehmet Demircan</p>
               <div class="flex items-center text-sm text-gray-500 dark:text-gray-400"></div>
             </div>
           <ul class="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+          <li class="flex items-center">
+          <i class="fa-solid fa-cake-candles me-2"></i>
+       
+            <a href="https://www.instagram.com/mehmetcya_">22.08.2002</a>
           
+            </li>
+            <hr />
+            <li class="flex items-center">
+            <i class="fa-solid fa-location-dot me-2"></i>
+            <a href="https://www.instagram.com/mehmetcya_">Kayseri </a>
+          
+            </li>
+            <hr />
             <li class="flex items-center">
             <i class="fa-brands fa-instagram me-2"></i>
             <a href="https://www.instagram.com/mehmetcya_">mehmetcya_</a>
