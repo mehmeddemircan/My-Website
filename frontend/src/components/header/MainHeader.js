@@ -20,35 +20,36 @@ import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from "antd";
 const products = [
   {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
+    name: "Bloglar",
+    description: "Yazdığım bloglar",
+    href: "/bloglar",
     icon: FingerPrintIcon,
   },
   {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
+    name: "Kitaplar",
+    description: "Okumaktan zevk aldıgım ve okuduğum kitaplar",
+    href: "/kitaplar",
+    icon: ChartPieIcon,
   },
   {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
+    name: "Filmler",
+    description: "İzlemekten zevk aldıgım ve izlediğim filmler",
+    href: "/filmler",
+    icon: CursorArrowRaysIcon,
   },
+
+  // {
+  //   name: "Integrations",
+  //   description: "Connect with third-party tools",
+  //   href: "#",
+  //   icon: SquaresPlusIcon,
+  // },
+  // {
+  //   name: "Automations",
+  //   description: "Build strategic funnels that will convert",
+  //   href: "#",
+  //   icon: ArrowPathIcon,
+  // },
 ];
 const callsToAction = [
   { name: "Watch demo", href: "#", icon: PlayCircleIcon },
@@ -96,7 +97,7 @@ const MainHeader = () => {
           <Popover.Group className="hidden lg:flex lg:gap-x-12">
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-                Product
+                Favoriler
                 <ChevronDownIcon
                   className="h-5 w-5 flex-none text-gray-400"
                   aria-hidden="true"
@@ -163,19 +164,19 @@ const MainHeader = () => {
               href="/features"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              Features
+              Özellikler
             </a>
             <a
               href="/profile"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              Profile
+              CV
             </a>
             <a
               href="/contact-me"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              Contact Me
+              İletişime Geç
             </a>
           </Popover.Group>
           <div
@@ -218,7 +219,7 @@ const MainHeader = () => {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                          Product
+                          Favoriler
                           <ChevronDownIcon
                             className={classNames(
                               open ? "rotate-180" : "",
@@ -246,19 +247,19 @@ const MainHeader = () => {
                     href="/features"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Features
+                    Özellikler
                   </a>
                   <a
                     href="/profile"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Profile
+                    CV
                   </a>
                   <a
                     href="/contact-me"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Contact Me
+                   İletişime Geç
                   </a>
                 </div>
                 <div className="py-6" onClick={handleShowLanguageModal}>
