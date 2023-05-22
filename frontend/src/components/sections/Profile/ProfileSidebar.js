@@ -8,7 +8,7 @@ const ProfileSidebar = () => {
           <div class="flex items-center mb-6 space-x-4">
             <Image
               class="w-12 h-10 rounded-full"
-              src="https://images.pexels.com/photos/15254467/pexels-photo-15254467/free-photo-of-dj-with-mixer-during-party.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://res.cloudinary.com/dn6obhhvq/image/upload/v1684760758/WhatsApp_Image_2023-05-22_at_4.05.28_PM_loxos9.jpg"
               alt=""
             />
            
