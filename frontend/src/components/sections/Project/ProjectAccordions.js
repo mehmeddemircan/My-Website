@@ -53,7 +53,8 @@ const ProjectAccordions = () => {
                   }
                   id="sect"
                 >
-             <a  className='text-gray-600' href={getProjectDetails.project.webUrl} target='_blank'>{getProjectDetails.project.webUrl}</a> 
+                  Gizlilik gereği web url verilmemiştir lütfen kusura bakmayın 
+             {/* <a  className='text-gray-600' href={getProjectDetails.project.webUrl} target='_blank'>{getProjectDetails.project.webUrl}</a>  */}
                 </div>
               </div>
            
