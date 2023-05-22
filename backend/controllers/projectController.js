@@ -94,7 +94,7 @@ exports.updateProject = catchAsyncErrors(async (req, res) => {
     project.thumbnailImage = req.body.thumbnailImage || project.thumbnailImage
     project.webUrl = req.body.webUrl || project.webUrl
     project.features  = req.body.features || project.features
-
+    project.technologies = req.body.technologies || project.technologies
        // Upload new images to Cloudinary if provided
        if (req.body.images && req.body.images.length > 0) {
         const uploadedImages = await uploadImagesToCloudinary(req.body.images);
@@ -109,67 +109,67 @@ exports.updateProject = catchAsyncErrors(async (req, res) => {
   }
 });
 
-exports.addTechnologyToProject = async (req, res) => {
-  try {
-    const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
-    const techId = req.body.techId; // Assuming you have the technology ID in the request body
+// exports.addTechnologyToProject = async (req, res) => {
+//   try {
+//     const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
+//     const techId = req.body.techId; // Assuming you have the technology ID in the request body
 
-    // Check if the project exists
-    const project = await Project.findById(projectId);
-    if (!project) {
-      return res.status(404).json({ error: "Project not found" });
-    }
+//     // Check if the project exists
+//     const project = await Project.findById(projectId);
+//     if (!project) {
+//       return res.status(404).json({ error: "Project not found" });
+//     }
 
-    // Check if the technology exists
-    const tech = await TechFeature.findById(techId);
-    if (!tech) {
-      return res.status(404).json({ error: "Technology not found" });
-    }
+//     // Check if the technology exists
+//     const tech = await TechFeature.findById(techId);
+//     if (!tech) {
+//       return res.status(404).json({ error: "Technology not found" });
+//     }
 
-    // Push the technology ID into the project's technologies array
-    project.technologies.push(techId);
+//     // Push the technology ID into the project's technologies array
+//     project.technologies.push(techId);
 
-    // Save the updated project
-    await project.save();
+//     // Save the updated project
+//     await project.save();
 
-    res
-      .status(200)
-      .json({ message: "Technology added to the project successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+//     res
+//       .status(200)
+//       .json({ message: "Technology added to the project successfully" });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
-exports.removeTechFeatureFromProject = async (req, res) => {
-  try {
-    const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
-    const techId = req.params.techId; // Assuming you have the tech feature ID in the request parameters
+// exports.removeTechFeatureFromProject = async (req, res) => {
+//   try {
+//     const projectId = req.params.projectId; // Assuming you have the project ID in the request parameters
+//     const techId = req.params.techId; // Assuming you have the tech feature ID in the request parameters
 
-    // Check if the project exists
-    const project = await Project.findById(projectId);
-    if (!project) {
-      return res.status(404).json({ error: "Project not found" });
-    }
+//     // Check if the project exists
+//     const project = await Project.findById(projectId);
+//     if (!project) {
+//       return res.status(404).json({ error: "Project not found" });
+//     }
 
-    // Check if the tech feature exists
-    const techFeature = await TechFeature.findById(techId);
-    if (!techFeature) {
-      return res.status(404).json({ error: "Tech feature not found" });
-    }
+//     // Check if the tech feature exists
+//     const techFeature = await TechFeature.findById(techId);
+//     if (!techFeature) {
+//       return res.status(404).json({ error: "Tech feature not found" });
+//     }
 
-    // Remove the tech feature ID from the project's technologies array
-    const index = project.technologies.indexOf(techId);
-    if (index !== -1) {
-      project.technologies.splice(index, 1);
-    }
+//     // Remove the tech feature ID from the project's technologies array
+//     const index = project.technologies.indexOf(techId);
+//     if (index !== -1) {
+//       project.technologies.splice(index, 1);
+//     }
 
-    // Save the updated project
-    await project.save();
+//     // Save the updated project
+//     await project.save();
 
-    res
-      .status(200)
-      .json({ message: "Tech feature removed from the project successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+//     res
+//       .status(200)
+//       .json({ message: "Tech feature removed from the project successfully" });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
