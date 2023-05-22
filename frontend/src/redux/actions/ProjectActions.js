@@ -8,7 +8,7 @@ export const GetProjects = (limit,page) => async (dispatch) => {
       });
   
       const { data } = await axios.get(
-        `http://localhost:5000/api/projects?limit=${limit}&page=${page}`
+        `https://mywebsiteapi.onrender.com/api/projects?limit=${limit}&page=${page}`
       );
   
       dispatch({
@@ -30,7 +30,7 @@ export const GetProjects = (limit,page) => async (dispatch) => {
       });
   
       const { data } = await axios.get(
-        `http://localhost:5000/api/projects/${projectId}`
+        `https://mywebsiteapi.onrender.com/api/projects/${projectId}`
       );
   
       dispatch({
