@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectCard from "../cards/ProjectCard";
-import ProjectPagination from "../pagination/ProjectPagination";
+
 import { useSelector } from "react-redux";
 import LoadingSpinner from "../spinner/LoadingSpinner";
 
