@@ -41,7 +41,12 @@ var projectSchema = new mongoose.Schema({
             type : ObjectId,
             ref : 'Comment'
         }
-    ]
+    ],
+    isFutureProject : {
+        type : Boolean,
+        required : true , 
+        default : false ,
+    }
 },{timestamps : true});
 
 var Project = mongoose.model('Project', projectSchema);
