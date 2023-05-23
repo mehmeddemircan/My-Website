@@ -198,15 +198,12 @@ const MainHeader = () => {
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                        {/* <item.icon
-                            className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                            aria-hidden="true"
-                          /> */}
+                     
                         <i class="fa-solid fa-people-group fs-6 text-gray-600 group-hover:text-indigo-600"></i>
                       </div>
                       <div className="flex-auto">
                         <a
-                          href="/ekibekatıl"
+                          href="/join-to-team"
                           className="block font-semibold text-gray-900"
                         >
                           Ekibe Katıl
@@ -227,7 +224,7 @@ const MainHeader = () => {
                       </div>
                       <div className="flex-auto">
                         <a
-                          href="/contact-me"
+                          href="/give-job"
                           className="block font-semibold text-gray-900"
                         >
                           İş Teklifinde Bulun
@@ -337,7 +334,7 @@ const MainHeader = () => {
                           <Disclosure.Button
                             key="ekibekatıl"
                             as="a"
-                            href="/ekibekatıl"
+                            href="/join-to-team"
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             Ekibe Katıl
@@ -345,7 +342,7 @@ const MainHeader = () => {
                           <Disclosure.Button
                             key="isteklifi"
                             as="a"
-                            href="/contact-me"
+                            href="/give-job"
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             İş Teklifinde Bulun
