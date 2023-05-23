@@ -3,10 +3,11 @@ import MainLayout from "../layouts/MainLayout";
 import HeaderSections from "../components/sections/HeaderSections";
 import ProjectList from "../components/list/ProjectList";
 import ProfileSections from "../components/sections/ProfileSections";
-import ProjectPagination from "../components/pagination/ProjectPagination";
+
 import MetaTitle from "../meta/MetaTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProjects } from "../redux/actions/ProjectActions";
+import CustomPagination from "../components/pagination/CustomPagination";
 
 const HomePage = () => {
   const getAllProject = useSelector((state) => state.project.getAllProject);
@@ -24,7 +25,7 @@ const HomePage = () => {
       <HeaderSections />
 
       <ProjectList />
-      <ProjectPagination
+      <CustomPagination
         onChange={(page) => setCurrentPage(page)}
         current={currentPage}
         defaultCurrent={1}
