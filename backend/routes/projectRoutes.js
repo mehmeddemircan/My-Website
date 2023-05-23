@@ -1,5 +1,5 @@
 var express = require('express');
-const { getProjectsWithPage, getProjectDetails, createProject, updateProject, deleteProject, addTechnologyToProject, removeTechFeatureFromProject } = require('../controllers/projectController');
+const { getProjectsWithPage, getProjectDetails, createProject, updateProject, deleteProject, addTechnologyToProject, removeTechFeatureFromProject, getFutureProjects } = require('../controllers/projectController');
 
 
 var router = express.Router();
@@ -10,8 +10,6 @@ router.route('/create-project').post(createProject)
 router.route('/projects/:projectId/update').put(updateProject)
 router.route('/projects/:projectId/delete').delete(deleteProject)
 
-// router.route('/projects/:projectId/add-technology').post(addTechnologyToProject);
-// router.route('/projects/:projectId/technologies/:techId/remove').delete(removeTechFeatureFromProject)
-// router.delete('/:projectId/remove-tech-feature/:techId', projectController.removeTechFeatureFromProject);
+router.route('/future/projects').get(getFutureProjects)
 
 module.exports = router;
