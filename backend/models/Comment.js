@@ -16,7 +16,8 @@ var commentSchema = new mongoose.Schema({
     },
     parentCommentId: {
         type: ObjectId, 
-        ref: 'Comment' 
+        ref: 'Comment' ,
+        default : null
     }
    
 },{timestamps: true});
