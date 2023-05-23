@@ -58,7 +58,7 @@ exports.getFutureProjects = catchAsyncErrors(async(req,res) => {
 
     const startIndex = (page -1) * limit ; 
     const totalFutureProjects = await Project.countDocuments()
-    const projects = await Project.find({isFutureProject : true }).select("title , description thumbnailImage createdAt updatedAt").skip(startIndex).limit(limit)
+    const projects = await Project.find({isFutureProject : true }).select("title description thumbnailImage isFutureProject createdAt updatedAt").skip(startIndex).limit(limit)
 
     res.status(200).json({
       totalFutureProjects ,
