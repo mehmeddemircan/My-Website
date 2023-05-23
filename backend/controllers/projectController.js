@@ -50,6 +50,29 @@ exports.getProjectsWithPage = catchAsyncErrors(async (req, res) => {
   }
 });
 
+exports.getFutureProjects = catchAsyncErrors(async(req,res) => {
+  try {
+
+    const page = parseInt(req.query.page) || 1 ;
+    const limit = parseInt(req.query.limit) || 10 ; 
+
+    const startIndex = (page -1) * limit ; 
+    const totalFutureProjects = await Project.countDocuments()
+    const projects = await Project.find({isFutureProject : true }).select("title , description thumbnailImage createdAt updatedAt").skip(startIndex).limit(limit)
+
+    res.status(200).json({
+      totalFutureProjects ,
+      currentPage : page ,
+      totalPages : Math.ceil(totalFutureProjects / limit),
+      results : projects
+    })
+
+
+  } catch (error) {
+    res.status(500).json({error : error.message})
+  }
+})
+
 exports.getProjectDetails = catchAsyncErrors(async (req, res) => {
   try {
     const projectDetails = await Project.findById(
