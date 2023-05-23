@@ -16,7 +16,7 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
 import LanguageModal from "../modal/LanguageModal";
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 const products = [
   {
@@ -38,12 +38,12 @@ const products = [
     icon: CursorArrowRaysIcon,
   },
 
-  // {
-  //   name: "Integrations",
-  //   description: "Connect with third-party tools",
-  //   href: "#",
-  //   icon: SquaresPlusIcon,
-  // },
+  {
+    name: "Templates",
+    description: "Hazır temalar satın alabilirsiniz",
+    href: "/temalar",
+    icon: SquaresPlusIcon,
+  },
   // {
   //   name: "Automations",
   //   description: "Build strategic funnels that will convert",
@@ -172,12 +172,77 @@ const MainHeader = () => {
             >
               CV
             </a>
-            <a
-              href="/contact-me"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              İletişime Geç
-            </a>
+
+            <Popover className="relative">
+              <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                İletişime Geç
+                <ChevronDownIcon
+                  className="h-5 w-5 flex-none text-gray-400"
+                  aria-hidden="true"
+                />
+              </Popover.Button>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                  <div className="p-4">
+                    <div
+                      key="ekibekatıl"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                        {/* <item.icon
+                            className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                            aria-hidden="true"
+                          /> */}
+                        <i class="fa-solid fa-people-group fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                      </div>
+                      <div className="flex-auto">
+                        <a
+                          href="/ekibekatıl"
+                          className="block font-semibold text-gray-900"
+                        >
+                          Ekibe Katıl
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600">
+                          Beraber yeni projelere imza atabiliriz
+                        </p>
+                      </div>
+                    </div>
+
+                    <div
+                      key="işteklifi"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                        <i class="fa-solid fa-terminal  fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                      </div>
+                      <div className="flex-auto">
+                        <a
+                          href="/contact-me"
+                          className="block font-semibold text-gray-900"
+                        >
+                          İş Teklifinde Bulun
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600">
+                          İş teklifinde bulunarak projelerinizi belirterek
+                          iletişime geçin
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Popover.Panel>
+              </Transition>
+            </Popover>
           </Popover.Group>
           <div
             className="hidden lg:flex lg:flex-1 lg:justify-end"
@@ -200,8 +265,8 @@ const MainHeader = () => {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
-              <Avatar size={32} icon={<UserOutlined />} />
-              <span className="ms-3">My Website</span>
+                <Avatar size={32} icon={<UserOutlined />} />
+                <span className="ms-3">My Website</span>
               </a>
               <button
                 type="button"
@@ -255,12 +320,40 @@ const MainHeader = () => {
                   >
                     CV
                   </a>
-                  <a
-                    href="/contact-me"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                   İletişime Geç
-                  </a>
+                  <Disclosure as="div" className="-mx-3">
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                          İletişime Geç
+                          <ChevronDownIcon
+                            className={classNames(
+                              open ? "rotate-180" : "",
+                              "h-5 w-5 flex-none"
+                            )}
+                            aria-hidden="true"
+                          />
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="mt-2 space-y-2">
+                          <Disclosure.Button
+                            key="ekibekatıl"
+                            as="a"
+                            href="/ekibekatıl"
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
+                            Ekibe Katıl
+                          </Disclosure.Button>
+                          <Disclosure.Button
+                            key="isteklifi"
+                            as="a"
+                            href="/contact-me"
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
+                            İş Teklifinde Bulun
+                          </Disclosure.Button>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
                 </div>
                 <div className="py-6" onClick={handleShowLanguageModal}>
                   <i class="fa-solid fa-globe"></i>
