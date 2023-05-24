@@ -1,16 +1,38 @@
 //replace modelSchema,ModelName with whatever you want
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
-var blogSchema = new mongoose.Schema({
+var blogSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required : true ,
+      type: String,
+      required: true,
     },
-    text: {
-        type: String,
-        required : true 
-    },
-},{timestamps : true });
+    // paragrapf: [
+    //   {
+    //     text: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //     images: [
+    //       {
+    //         public_id: {
+    //           type: String,
+    //         },
+    //         url: {
+    //           type: String,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // ],
 
-var Blog = mongoose.model('Blog', blogSchema);
+    text: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+var Blog = mongoose.model("Blog", blogSchema);
 module.exports = Blog;
