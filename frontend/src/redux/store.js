@@ -5,14 +5,17 @@ import projectReducer from "./reducers/ProjectReducers";
 import blogReducer from "./reducers/BlogReducer";
 import movieReducer from "./reducers/MovieReducer";
 import bookReducer from "./reducers/BookReducer";
+import { authReducer } from "./reducers/AuthReducer";
 
 
 
 const rootReducer = combineReducers({
+    auth : authReducer ,
     project : projectReducer,
     blog : blogReducer,
     movie : movieReducer ,
     book : bookReducer
+ 
 })
 
 const initialState = {}
