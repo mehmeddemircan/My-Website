@@ -11,6 +11,7 @@ import BlogsPage from './pages/BlogsPage';
 import BlogDetailsPage from './pages/BlogDetailsPage';
 import GiveJobFormPage from './pages/GiveJobFormPage';
 import JoinToTeamFormPage from './pages/JoinToTeamFormPage';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
     <Routes>
       <Route index path='/' element={<HomePage />} />
       <Route path='/features' element={<FeaturesPage />} />
-
+      <Route path="/login" element={<AuthPage />} />
       <Route path='/profile' element={<ProfilePage />} />
       <Route path="/projects/:projectId/details" element={<ProjectDetailsPage />} />
       <Route path='/bloglar' element={<BlogsPage />} />
