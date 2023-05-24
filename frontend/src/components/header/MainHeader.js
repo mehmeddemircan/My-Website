@@ -25,26 +25,26 @@ const products = [
   {
     name: "Bloglar",
     description: "Yazdığım bloglar",
-    href: "/bloglar",
+    href: "/blogs",
     icon: FingerPrintIcon,
   },
   {
     name: "Kitaplar",
     description: "Okumaktan zevk aldıgım ve okuduğum kitaplar",
-    href: "/kitaplar",
+    href: "/books",
     icon: ChartPieIcon,
   },
   {
     name: "Filmler",
     description: "İzlemekten zevk aldıgım ve izlediğim filmler",
-    href: "/filmler",
+    href: "/movies",
     icon: CursorArrowRaysIcon,
   },
 
   {
     name: "Templates",
     description: "Hazır temalar satın alabilirsiniz",
-    href: "/temalar",
+    href: "/templates",
     icon: SquaresPlusIcon,
   },
 
@@ -167,7 +167,7 @@ const MainHeader = () => {
               Özellikler
             </a>
             <a
-              href="/profile"
+              href="/my-cv"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               CV
@@ -312,7 +312,7 @@ const MainHeader = () => {
                     Özellikler
                   </a>
                   <a
-                    href="/profile"
+                    href="/my-cv"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     CV
