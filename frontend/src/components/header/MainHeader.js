@@ -18,6 +18,8 @@ import {
 import LanguageModal from "../modal/LanguageModal";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
+import { LoggedInSegment, PhoneLoggedInSegment } from "./LoggedInSegment";
+import { NotLoggedInSegment } from "./NotLoggedInSegment";
 const products = [
   {
     name: "Bloglar",
@@ -198,7 +200,6 @@ const MainHeader = () => {
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                     
                         <i class="fa-solid fa-people-group fs-6 text-gray-600 group-hover:text-indigo-600"></i>
                       </div>
                       <div className="flex-auto">
@@ -241,12 +242,13 @@ const MainHeader = () => {
               </Transition>
             </Popover>
           </Popover.Group>
-          <div
-            className="hidden lg:flex lg:flex-1 lg:justify-end"
-            onClick={handleShowLanguageModal}
-          >
-            <i class="fa-solid fa-globe"></i>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end ">
+            <i
+              class="fa-solid fa-globe me-3 mt-1"
+              onClick={handleShowLanguageModal}
+            ></i>
           </div>
+        <NotLoggedInSegment />
           <LanguageModal
             showLanguageModal={showLanguageModal}
             handleCloseLanguageModal={handleCloseLanguageModal}
@@ -352,9 +354,12 @@ const MainHeader = () => {
                     )}
                   </Disclosure>
                 </div>
+
                 <div className="py-6" onClick={handleShowLanguageModal}>
                   <i class="fa-solid fa-globe"></i>
                 </div>
+              
+                    {/* <PhoneLoggedInSegment />           */}
                 <LanguageModal
                   showLanguageModal={showLanguageModal}
                   handleCloseLanguageModal={handleCloseLanguageModal}
