@@ -19,7 +19,8 @@ import LanguageModal from "../modal/LanguageModal";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { LoggedInSegment, PhoneLoggedInSegment } from "./LoggedInSegment";
-import { NotLoggedInSegment } from "./NotLoggedInSegment";
+import { NotLoggedInSegment, PhoneNotLoggedInSegment } from "./NotLoggedInSegment";
+import { useSelector } from "react-redux";
 const products = [
   {
     name: "Bloglar",
@@ -46,12 +47,7 @@ const products = [
     href: "/temalar",
     icon: SquaresPlusIcon,
   },
-  // {
-  //   name: "Automations",
-  //   description: "Build strategic funnels that will convert",
-  //   href: "#",
-  //   icon: ArrowPathIcon,
-  // },
+
 ];
 const callsToAction = [
   { name: "Watch demo", href: "#", icon: PlayCircleIcon },
@@ -72,6 +68,8 @@ const MainHeader = () => {
   const handleCloseLanguageModal = () => {
     setShowLanguageModal(false);
   };
+
+  const auth = useSelector((state) => state.auth)
 
   return (
     <Fragment>
@@ -248,7 +246,7 @@ const MainHeader = () => {
               onClick={handleShowLanguageModal}
             ></i>
           </div>
-        <NotLoggedInSegment />
+                      {auth.authenticate ? <LoggedInSegment /> : <NotLoggedInSegment />}
           <LanguageModal
             showLanguageModal={showLanguageModal}
             handleCloseLanguageModal={handleCloseLanguageModal}
@@ -359,7 +357,7 @@ const MainHeader = () => {
                   <i class="fa-solid fa-globe"></i>
                 </div>
               
-                    {/* <PhoneLoggedInSegment />           */}
+                 {auth.authenticate ? <PhoneLoggedInSegment /> : <PhoneNotLoggedInSegment />}
                 <LanguageModal
                   showLanguageModal={showLanguageModal}
                   handleCloseLanguageModal={handleCloseLanguageModal}
