@@ -1,4 +1,8 @@
-import React, { Fragment , useState} from "react";
+import React, { Fragment , useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Login, register as _register } from "../../redux/actions/AuthActions";
+import { message } from "antd";
 
 const AuthForm = () => {
 
@@ -6,7 +10,52 @@ const AuthForm = () => {
     const handleChangeForm = () => {
         setShowRegister((prev) => !prev)
     }
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
+    const auth = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const userSignUp = () => {
+      const user = { firstname, lastname, email, password };
+  
+      dispatch(_register(user));
+    };
+      // authentication işlemi 
+  const userLogin = (e) => {
+    e.preventDefault();
+
+    if (showRegister) {
+      userSignUp();
+    } else {
+      dispatch(Login({ email, password }));
+    }
+  };
+  // regiter true ise inputları temizle
+  useEffect(() => {
+    if (showRegister) {
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPassword("");
+    }
+  }, [showRegister]);
+  // başarılı şekilde giriş yaparsa anasayfaya yönlendir
+  useEffect(() => {
+    if (auth.authenticate) {
+      navigate("/", { replace: true });
+    }
+  }, [auth.authenticate, navigate]);
+  // authentication olurken hata mesajlarını göster
+  useEffect(() => {
+    if (!auth.authenticating && auth.error !== null && auth.token === null) {
+      if (auth.error) {
+        message.error(auth.error);
+      }
+    }
+  }, [auth.authenticating, auth.error, auth.token]);
   return (
     <Fragment>
     <section class="border-red-500 bg-gray-200 min-h-screen flex items-center justify-center">
@@ -19,24 +68,24 @@ const AuthForm = () => {
           {showRegister && (
             <Fragment>
                 <div className="mb-2">
-            <label class="block text-gray-700">Email Address</label>
-            <input type="email" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+            <label class="block text-gray-700">İsim</label>
+            <input value={firstname} onChange={(e) => setFirstname(e.target.value) } type="email" name="" id="" placeholder="İsim giriniz " class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
           </div>
           <div className="mb-2">
-            <label class="block text-gray-700">Email Address</label>
-            <input type="email" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+            <label class="block text-gray-700">Soyisim</label>
+            <input value={lastname} onChange={(e) => setLastname(e.target.value)}  type="email" name="" id="" placeholder="Soyisim giriniz " class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
           </div>
             </Fragment>
           )}
 
           <div>
             <label class="block text-gray-700">Email Address</label>
-            <input type="email" name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="" id="" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
           </div>
 
           <div class="mt-2">
             <label class="block text-gray-700">Password</label>
-            <input type="password" name="" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="" id="" placeholder="Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none" required />
           </div>
 
@@ -45,7 +94,7 @@ const AuthForm = () => {
           </div>
 
           <button type="submit" class="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-3 mt-6">Log In</button>
+                px-4 py-3 mt-6" onClick={userLogin} >Submit</button>
         </form>
 
         <div class="mt-7 grid grid-cols-3 items-center text-gray-500">
