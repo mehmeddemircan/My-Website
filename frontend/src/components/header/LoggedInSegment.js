@@ -20,6 +20,7 @@ export const PhoneLoggedInSegment = () => {
   const LogoutHandler = () => {
     dispatch(logout());
   };
+  const auth = useSelector((state) => state.auth)
 
   return (
     <Disclosure as="div" className="-mx-3">
@@ -36,10 +37,22 @@ export const PhoneLoggedInSegment = () => {
             />
           </Disclosure.Button>
           <Disclosure.Panel className="mt-2 space-y-2">
+          <Disclosure.Button
+              key="profilim"
+              as="a"
+              href="/my-profile"
+              className="block flex justify-between rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+            >
+             <a className="font-semibold text-lg text-start">
+                  {auth.user.firstname}
+                  <a className="ms-2">{auth.user.lastname}</a>
+                </a>
+                <button className="btn btn-dark rounded-pill" >Profilim</button>
+            </Disclosure.Button>
             <Disclosure.Button
               key="/yorumlarım"
               as="a"
-              href="/join-to-team"
+              href="/my-comments"
               className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
             >
               Yorumlarım
@@ -47,10 +60,26 @@ export const PhoneLoggedInSegment = () => {
             <Disclosure.Button
               key="isteklifi"
               as="a"
-              href="/give-job"
+              href="/my-forms"
               className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
             >
               Formlarım
+            </Disclosure.Button>
+            <Disclosure.Button
+              key="isteklifi"
+              as="a"
+              href="/my-basket"
+              className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+            >
+              Sepetim
+            </Disclosure.Button>
+            <Disclosure.Button
+              key="isteklifi"
+              as="a"
+              href="/my-orders"
+              className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+            >
+              Siparişlerim
             </Disclosure.Button>
             <Disclosure.Button
               key="isteklifi"
@@ -74,7 +103,7 @@ export const LoggedInSegment = () => {
   const LogoutHandler = () => {
     dispatch(logout());
   };
-  const auth = useSelector((state) => state.auth)
+  const auth = useSelector((state) => state.auth);
   return (
     <Popover.Group className="hidden lg:flex lg:gap-x-12">
       <Popover className="relative">
@@ -97,13 +126,19 @@ export const LoggedInSegment = () => {
         >
           <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4">
-                <h5 className="text-start">{auth.user.firstname}<a className="ms-2">{auth.user.lastname}</a></h5>
+              <div class="flex flex-1 justify-between items-center">
+                <a className="font-semibold text-lg text-start">
+                  {auth.user.firstname}
+                  <a className="ms-2">{auth.user.lastname}</a>
+                </a>
+                <button className="btn btn-dark rounded-pill" onClick={() => navigate('/my-profile', {replace : true })}>Profilim</button>
+              </div>
               <div
                 key="yorumlarım"
                 className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
               >
                 <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                  <i class="fa-solid fa-people-group fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                  <i class="fa-solid fa-comment fs-6 text-gray-600 group-hover:text-indigo-600"></i>
                 </div>
                 <div className="flex-auto">
                   <a
@@ -121,14 +156,48 @@ export const LoggedInSegment = () => {
                 className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
               >
                 <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                  <i class="fa-solid fa-terminal  fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                  <i class="fa-brands fa-wpforms  fs-6 text-gray-600 group-hover:text-indigo-600"></i>
                 </div>
                 <div className="flex-auto">
                   <a
-                    href="/give-job"
+                    href="/my-forms"
                     className="block font-semibold text-gray-900"
                   >
                     Formlarım
+                    <span className="absolute inset-0" />
+                  </a>
+                </div>
+              </div>
+              <div
+                key="sepetim"
+                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+              >
+                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <i class="fa-solid fa-basket-shopping  fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                </div>
+                <div className="flex-auto">
+                  <a
+                    href="/my-basket"
+                    className="block font-semibold text-gray-900"
+                  >
+                    Sepetim
+                    <span className="absolute inset-0" />
+                  </a>
+                </div>
+              </div>
+              <div
+                key="sepetim"
+                className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+              >
+                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <i class="fa-solid fa-file-invoice fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                </div>
+                <div className="flex-auto">
+                  <a
+                    href="/my-orders"
+                    className="block font-semibold text-gray-900"
+                  >
+                    Siparişlerim
                     <span className="absolute inset-0" />
                   </a>
                 </div>
@@ -138,7 +207,7 @@ export const LoggedInSegment = () => {
                 className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
               >
                 <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                  <i class="fa-solid fa-terminal  fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                  <i class="fa-solid fa-right-from-bracket fs-6 text-gray-600 group-hover:text-indigo-600"></i>
                 </div>
                 <div className="flex-auto">
                   <a
