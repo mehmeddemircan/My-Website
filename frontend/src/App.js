@@ -19,6 +19,7 @@ import CVPage from "./pages/CVPage";
 import ProfilePage from "./pages/ProfilePage";
 import TemplatesPage from "./pages/TemplatesPage";
 import PaymentPage from "./pages/PaymentPage";
+import ProjectIdeaFormPage from "./pages/ProjectIdeaFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
         <Route path="/join-to-team" element={<JoinToTeamFormPage />} />
         <Route path="/my-profile" element={<ProfilePage />} />
         <Route path="/give-job" element={<GiveJobFormPage />} />
+        <Route path="/give-project-idea" element={<ProjectIdeaFormPage />} />
         <Route path="/templates" element={<TemplatesPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="*" element={<NotFoundPage />} />
