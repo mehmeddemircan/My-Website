@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_PROJECT_COMMENT_FAIL, CREATE_PROJECT_COMMENT_SUCCESS, DELETE_PROJECT_COMMENT_FAIL, DELETE_PROJECT_COMMENT_REQUEST, DELETE_PROJECT_COMMENT_SUCCESS, GET_PROJECT_COMMENTS_FAIL, GET_PROJECT_COMMENTS_REQUEST, GET_PROJECT_COMMENTS_SUCCESS, GET_PROJECT_COMMENT_REPLIES_FAIL, GET_PROJECT_COMMENT_REPLIES_REQUEST, GET_PROJECT_COMMENT_REPLIES_SUCCESS, UPDATE_PROJECT_COMMENT_FAIL, UPDATE_PROJECT_COMMENT_REQUEST, UPDATE_PROJECT_COMMENT_SUCCESS } from "../constants/CommentConstants";
+import { CREATE_PROJECT_COMMENT_FAIL, CREATE_PROJECT_COMMENT_REQUEST, CREATE_PROJECT_COMMENT_SUCCESS, DELETE_PROJECT_COMMENT_FAIL, DELETE_PROJECT_COMMENT_REQUEST, DELETE_PROJECT_COMMENT_SUCCESS, GET_PROJECT_COMMENTS_FAIL, GET_PROJECT_COMMENTS_REQUEST, GET_PROJECT_COMMENTS_SUCCESS, GET_PROJECT_COMMENT_REPLIES_FAIL, GET_PROJECT_COMMENT_REPLIES_REQUEST, GET_PROJECT_COMMENT_REPLIES_SUCCESS, UPDATE_PROJECT_COMMENT_FAIL, UPDATE_PROJECT_COMMENT_REQUEST, UPDATE_PROJECT_COMMENT_SUCCESS } from "../constants/CommentConstants";
 
 
 export const GetProjectComments = (projectId,limit,page) => async (dispatch) => {
@@ -90,14 +90,14 @@ export const SendProjectComment = (comment) => async (dispatch) => {
     }
   };
 
-  export const DeleteProjectComment = (commentId) => async (dispatch) => {
+  export const DeleteProjectComment = (commentId,comment) => async (dispatch) => {
     try {
       dispatch({
         type: DELETE_PROJECT_COMMENT_REQUEST,
       });
   
-      const { data } = await axios.delete(
-        `https://mywebsiteapi.onrender.com/api/comments/${commentId}/delete`
+      const { data } = await axios.post(
+        `https://mywebsiteapi.onrender.com/api/comments/${commentId}/delete`,comment
       );
   
       dispatch({

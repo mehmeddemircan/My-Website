@@ -109,7 +109,7 @@ export const sendProjectCommentReducer = (
         ...state,
         loading: false,
         isAdded: false,
-        error: action.payload.error,
+        error: action.payload,
       };
     case CREATE_PROJECT_COMMENT_RESET:
       return {
@@ -143,7 +143,7 @@ export const deleteProjectCommentReducer = (
       };
 
     case DELETE_PROJECT_COMMENT_FAIL:
-      return { ...state, error: action.payload.error };
+      return { ...state, error: action.payload };
 
     case DELETE_PROJECT_COMMENT_RESET:
       return {
