@@ -1,6 +1,6 @@
 import { Modal } from 'antd'
 import React from 'react'
-import CommentForm from '../forms/CommentForm'
+import CommentForm from '../../forms/CommentForm'
 
 const ReplyCommentModal = ({showReplyCommentModal,handleCloseReplyCommentModal}) => {
   return (
