@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
-import CommentModal from "../../modal/CommentModal";
+import CommentModal from "../../modal/comment/CommentModal";
+import EditCommentModal from "../../modal/comment/EditCommentModal";
 
-const CommentPopoverContent = () => {
+const CommentPopoverContent = ({comment,handleDeleteProjectComment}) => {
 
     const [showCommentModal, setShowCommentModal] = useState(false)
 
@@ -26,13 +27,14 @@ const CommentPopoverContent = () => {
             <i class="fa-solid fa-pen-to-square me-2"></i> <a>Düzenle</a>
           </a>
         </li>
-        <CommentModal 
+        <EditCommentModal
+            comment={comment} 
             showCommentModal={showCommentModal}
             handleCloseCommentModal={handleCloseCommentModal}
         />
-        <li>
+        <li onClick={() => handleDeleteProjectComment(comment._id)}>
           <a
-            href="#"
+         
             class="block my-1 py-2 pe-2 ps-1 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <i class="fa-solid fa-trash me-2"></i>
