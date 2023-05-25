@@ -235,6 +235,29 @@ const MainHeader = () => {
                         </p>
                       </div>
                     </div>
+                    <div
+                      key="projefikir"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                     
+                   
+                  
+                        <i class="fa-solid fa-lightbulb fs-6 text-gray-600 group-hover:text-indigo-600"></i>
+                      </div>
+                      <div className="flex-auto">
+                        <a
+                          href="/give-project-idea"
+                          className="block font-semibold text-gray-900"
+                        >
+                          Proje Fikirinde Bulun
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600">
+                          Proje fikirinde bulunarak kabul edildikten sonra yapılan karlara ortak olabilirsiniz 
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </Popover.Panel>
               </Transition>
@@ -346,6 +369,14 @@ const MainHeader = () => {
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
                             İş Teklifinde Bulun
+                          </Disclosure.Button>
+                          <Disclosure.Button
+                            key="projefikriver"
+                            as="a"
+                            href="/give-project-idea"
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
+                            Proje Fikirinde Bulun
                           </Disclosure.Button>
                         </Disclosure.Panel>
                       </>
