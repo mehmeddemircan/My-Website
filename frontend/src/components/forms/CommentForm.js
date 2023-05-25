@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const CommentForm = () => {
+const CommentForm = ({text,setText}) => {
   return (
     <Fragment>
         <form class="mb-6">
@@ -9,6 +9,8 @@ const CommentForm = () => {
             Your comment
           </label>
           <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             id="comment"
             rows="6"
             class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
