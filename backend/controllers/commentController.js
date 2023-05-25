@@ -36,7 +36,7 @@ exports.getAllComment = catchAsyncErrors(async (req, res) => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const totalComments = await Comment.countDocuments();
+    const totalComments = await Comment.find({projectId : req.params.projectId}).countDocuments();
     const comments = await Comment.find({
       projectId: req.params.projectId,
       parentCommentId: null,
