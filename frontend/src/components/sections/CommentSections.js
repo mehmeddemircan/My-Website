@@ -1,9 +1,12 @@
-import React, { Fragment, useState } from 'react'
-import CommentModal from '../modal/CommentModal'
-import { Popover } from 'antd';
-import CommentPopoverContent from '../popover/content/CommentPopoverContent';
-import GenericPopover from '../popover/CommentPopover';
+import React, { Fragment, useEffect, useState } from 'react'
+import CommentModal from '../modal/comment/CommentModal'
+
 import CommentItem from '../listitem/CommentItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetProjectComments } from '../../redux/actions/CommentActions';
+import { useParams } from 'react-router-dom';
+import { message } from 'antd';
+import { CREATE_PROJECT_COMMENT_RESET, DELETE_PROJECT_COMMENT_RESET, UPDATE_PROJECT_COMMENT_RESET } from '../../redux/constants/CommentConstants';
 
 const CommentSections = () => {
 
@@ -15,6 +18,31 @@ const CommentSections = () => {
     const handleCloseCommentModal = () => {
       setShowCommentModal(false);
     };
+
+    const getProjectComments = useSelector((state) => state.comment.getProjectComments)
+    const sendProjectComment = useSelector((state) => state.comment.sendProjectComment)
+    const deleteProjectComment = useSelector((state) => state.comment.deleteProjectComment)
+    const updateProjectComment = useSelector((state) => state.comment.updateProjectComment)
+    const dispatch = useDispatch()
+    const {projectId} = useParams()
+    const [limit, setLimit] = useState(4)
+    const [currentPage, setCurrentPage] = useState(1)
+    useEffect(() => {
+        dispatch(GetProjectComments(projectId,limit,currentPage))
+        if (sendProjectComment.isAdded) {
+            message.success(sendProjectComment.message)
+            dispatch({type : CREATE_PROJECT_COMMENT_RESET})
+        }
+        if (deleteProjectComment.isDeleted) {
+            message.success(deleteProjectComment.message)
+            dispatch({type : DELETE_PROJECT_COMMENT_RESET})
+        }
+        if (updateProjectComment.isUpdated) {
+            message.success(updateProjectComment.message)
+            dispatch({type : UPDATE_PROJECT_COMMENT_RESET})
+        }
+    }, [dispatch,projectId,limit,currentPage,sendProjectComment.isAdded,deleteProjectComment.isDeleted,updateProjectComment.isUpdated])
+
   return (
    <Fragment>
      <div class="inline-flex items-center justify-center w-full">
@@ -40,13 +68,15 @@ const CommentSections = () => {
   <div class="max-w-100  px-4">
      
     
-       <CommentItem />
+     {getProjectComments.comments.map((comment) => (
+          <CommentItem key={comment._id} comment={comment}/>
+     ))}
   
     
     {/* COMMENT REPLIES */}
-    <article class="p-6 mb-6 ml-6 lg:ml-12 text-base  bg-white rounded-lg dark:bg-gray-900">
+    {/* <article class="p-6 mb-6 ml-6 lg:ml-12 text-base  bg-white rounded-lg dark:bg-gray-900">
         <CommentItem />
-    </article>
+    </article> */}
     
    </div>
 </section>
