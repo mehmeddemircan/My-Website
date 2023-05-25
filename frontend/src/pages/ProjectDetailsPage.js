@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { Image, Space, Tag } from "antd";
 import CommentSections from "../components/sections/CommentSections";
-import CommentModal from "../components/modal/CommentModal";
+import CommentModal from "../components/modal/comment/CommentModal";
 import ProjectGallery from "../components/gallery/ProjectGallery";
 import ProjectDescriptionFeature from "../components/sections/Project/ProjectDescriptionFeature";
 import ProjectTechnologies from "../components/sections/Project/ProjectTechnologies";
