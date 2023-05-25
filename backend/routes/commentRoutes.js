@@ -11,6 +11,6 @@ router.route('/comments/:commentId/replies').get(getCommentReplies)
 // kullanici griiş yapmadan calismayacak routerlar
 router.route('/create-comment').post(createComment)
 router.route('/comments/:commentId/update').put(updateComment)
-router.route('/comments/:commentId/delete').delete(deleteComment)
+router.route('/comments/:commentId/delete').post(deleteComment)
 
 module.exports = router;
