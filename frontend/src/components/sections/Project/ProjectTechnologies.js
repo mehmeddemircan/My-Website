@@ -13,7 +13,7 @@ const ProjectTechnologies = () => {
               <Space size={[0, 8]} wrap>
                 {getProjectDetails.project.technologies.map((technology) => (
                 
-                   <Tag color="#108ee9">{technology}</Tag>
+                   <Tag color="#108ee9" className='px-3 py-1'><span style={{fontSize: '15px'}}>{technology}</span></Tag>
                 ))}
               </Space>
             </div>
