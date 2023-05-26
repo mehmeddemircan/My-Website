@@ -21,6 +21,7 @@ import TemplatesPage from "./pages/TemplatesPage";
 import PaymentPage from "./pages/PaymentPage";
 import ProjectIdeaFormPage from "./pages/ProjectIdeaFormPage";
 import PrivateRoute from "./routes/PrivateRoute";
+import MyCommentsPage from "./pages/MyCommentsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,11 +50,12 @@ function App() {
         <Route path="/movies" element={<MoviesPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/join-to-team" element={<JoinToTeamFormPage />} />
-        <Route path="/my-profile" element={<ProfilePage />} />
+        <Route path="/my-profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+        <Route path="/my-comments" element={<PrivateRoute><MyCommentsPage /></PrivateRoute>} />
         <Route path="/give-job" element={<GiveJobFormPage />} />
         <Route path="/give-project-idea" element={<ProjectIdeaFormPage />} />
         <Route path="/templates" element={<TemplatesPage />} />
-        <Route path="/payment" element={<PrivateRoute><PaymentPage /> </PrivateRoute>} />
+        <Route path="/payment" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
