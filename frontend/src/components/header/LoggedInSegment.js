@@ -142,7 +142,7 @@ export const LoggedInSegment = () => {
                 </div>
                 <div className="flex-auto">
                   <a
-                    href="/join-to-team"
+                    href="/my-comments"
                     className="block font-semibold text-gray-900"
                   >
                     Yorumlarım
