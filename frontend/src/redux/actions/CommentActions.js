@@ -24,7 +24,7 @@ export const GetProjectComments = (projectId,limit,page) => async (dispatch) => 
     }
   };
 //get project comment replies
-export const getProjectCommentReplies = (commentId) => async(dispatch) => {
+export const GetProjectCommentReplies = (commentId) => async(dispatch) => {
     try {
         dispatch({
           type: GET_PROJECT_COMMENT_REPLIES_REQUEST,
