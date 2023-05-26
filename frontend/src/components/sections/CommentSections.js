@@ -3,7 +3,7 @@ import CommentModal from "../modal/comment/CommentModal";
 
 import CommentItem from "../listitem/CommentItem";
 import { useDispatch, useSelector } from "react-redux";
-import { GetProjectComments } from "../../redux/actions/CommentActions";
+import { GetProjectComments, GetProjectCommentReplies } from "../../redux/actions/CommentActions";
 import { useParams } from "react-router-dom";
 import { message } from "antd";
 import {
@@ -13,6 +13,7 @@ import {
 } from "../../redux/constants/CommentConstants";
 import AddedEmptyResult from "../result/AddedEmptyResult";
 import AddCommentButton from "../button/AddCommentButton";
+import CustomPagination from "../pagination/CustomPagination";
 
 const CommentSections = () => {
   const [showCommentModal, setShowCommentModal] = useState(false);
@@ -38,7 +39,7 @@ const CommentSections = () => {
   );
   const dispatch = useDispatch();
   const { projectId } = useParams();
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     dispatch(GetProjectComments(projectId, limit, currentPage));
@@ -63,6 +64,7 @@ const CommentSections = () => {
     deleteProjectComment.isDeleted,
     updateProjectComment.isUpdated,
   ]);
+
 
   return (
     <Fragment>
@@ -102,12 +104,17 @@ const CommentSections = () => {
             ))
           )}
 
-          {/* COMMENT REPLIES */}
-          {/* <article class="p-6 mb-6 ml-6 lg:ml-12 text-base  bg-white rounded-lg dark:bg-gray-900">
-        <CommentItem />
-    </article> */}
+        
+     
         </div>
       </section>
+      <CustomPagination
+        onChange={(page) => setCurrentPage(page)}
+        current={currentPage}
+        defaultCurrent={1}
+        pageSize={limit}
+        total={getProjectComments.totalComments}
+      />
     </Fragment>
   );
 };
