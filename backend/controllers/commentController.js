@@ -29,6 +29,7 @@ exports.createComment = catchAsyncErrors(async (req, res) => {
   }
 });
 
+//project comments
 exports.getAllComment = catchAsyncErrors(async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
