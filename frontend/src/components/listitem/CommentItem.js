@@ -1,12 +1,22 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import GenericPopover from '../popover/CommentPopover'
 import CommentPopoverContent from '../popover/content/CommentPopoverContent'
 import ReplyCommentModal from '../modal/comment/ReplyCommentModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { DeleteProjectComment } from '../../redux/actions/CommentActions'
+import { DeleteProjectComment, GetProjectCommentReplies } from '../../redux/actions/CommentActions'
 import { useParams } from 'react-router-dom'
+import { message } from 'antd'
+import { CREATE_PROJECT_COMMENT_RESET, DELETE_PROJECT_COMMENT_RESET, UPDATE_PROJECT_COMMENT_RESET } from '../../redux/constants/CommentConstants'
+import ReplyCommentList from './ReplyCommentList'
 
 const CommentItem = ({comment}) => {
+
+
+    const [showCommentReplies, setShowCommentReplies] = useState(false)
+
+    const handleToggleShowCommentReplies = () => {
+        setShowCommentReplies((prev) => !prev)
+    }
 
     const [showReplyCommentModal, setShowReplyCommentModal] = useState(false)
     
@@ -32,6 +42,30 @@ const CommentItem = ({comment}) => {
         }
    
     }
+    const sendProjectComment = useSelector(
+        (state) => state.comment.sendProjectComment
+      );
+
+      const deleteProjectComment = useSelector((state) => state.comment.deleteProjectComment)
+
+      const updateProjectComment = useSelector((state) => state.comment.updateProjectComment)
+
+    useEffect(() => {
+        if (showCommentReplies) {
+            
+             dispatch(GetProjectCommentReplies(comment._id))
+        }
+        if (sendProjectComment.isAdded) {
+          dispatch({ type: CREATE_PROJECT_COMMENT_RESET });
+        }
+        if (deleteProjectComment.isDeleted) {
+            dispatch({ type: DELETE_PROJECT_COMMENT_RESET });
+        }
+        if (updateProjectComment.isUpdated) {
+            dispatch({ type: UPDATE_PROJECT_COMMENT_RESET });
+        }
+      }, [dispatch,showCommentReplies,sendProjectComment.isDeleted,updateProjectComment.isUpdated,deleteProjectComment.isDeleted])
+    
 
   return (
     <Fragment>
@@ -41,7 +75,7 @@ const CommentItem = ({comment}) => {
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
                         class="mr-2 w-6 h-6 rounded-full"
                         src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                        alt="Michael Gough" />Michael Gough {comment._id} {userId}, {projectId}</p>
+                        alt="Michael Gough" />Michael Gough</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                         title="February 8th, 2022">Feb. 8, 2022</time></p>
             </div>
@@ -75,17 +109,29 @@ const CommentItem = ({comment}) => {
                </button>
    
             ) }
-            <button  type="button"
-                class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
-                    {/* badge olsun  */}
-                Tüm Yanıtları Gör  <i class="fa-solid fa-angle-down"></i>
-            </button>
+          {comment.parentCommentId === null && (
+              <button  type="button"
+              class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400"
+              onClick={handleToggleShowCommentReplies}
+              >
+               
+               
+                  {/* badge olsun  */}
+             {showCommentReplies ? "Kapat Yanıtları" : "Tüm Yanıtları Gör"}  
+             {showCommentReplies ? <i class="fa-solid fa-angle-up"></i> : <i class="fa-solid fa-angle-down"></i>}
+          </button>
+          )}
             <ReplyCommentModal 
+                comment={comment}
                 showReplyCommentModal={showReplyCommentModal}
                 handleCloseReplyCommentModal={handleCloseReplyCommentModal}
             />
         </div>
         </article>
+        {showCommentReplies && (
+             <ReplyCommentList />
+        )}
+                  
     </Fragment>
   )
 }
