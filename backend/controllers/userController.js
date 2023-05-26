@@ -99,3 +99,26 @@ exports.deleteUser = catchAsyncErrors(async(req,res) => {
 })
 
 // update profile 
+
+
+exports.getUserComments = catchAsyncErrors(async(req,res) => {
+    try {
+      const page = parseInt(req.query.page) || 1; 
+  const limit = parseInt(req.query.limit) || 4; 
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const totalComments = await Comment.find({userId : req.params.userId}).countDocuments();
+
+  const comments = await Comment.find({userId : req.params.userId}).skip(startIndex).limit(limit);
+  res.status(200).json({
+    totalComments,
+      currentPage : page ,
+      totalPages: Math.ceil(totalComments / limit),
+      results: comments
+  })
+    } catch (error) {
+        res.status(500).json({error : error.message})
+    }
+})
