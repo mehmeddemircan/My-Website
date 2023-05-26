@@ -9,7 +9,7 @@ import { message } from 'antd'
 import { CREATE_PROJECT_COMMENT_RESET, DELETE_PROJECT_COMMENT_RESET, UPDATE_PROJECT_COMMENT_RESET } from '../../redux/constants/CommentConstants'
 import ReplyCommentList from './ReplyCommentList'
 
-const CommentItem = ({comment}) => {
+const CommentItem = ({myComment,comment}) => {
 
 
     const [showCommentReplies, setShowCommentReplies] = useState(false)
@@ -32,7 +32,7 @@ const CommentItem = ({comment}) => {
 
 
     const [userId, setUserId] = useState(comment.userId)
-    const {projectId} = useParams()
+    const [projectId, setProjectId] = useState(comment.projectId)
 
     const dispatch = useDispatch()
     const handleDeleteProjectComment = () => {
@@ -79,7 +79,16 @@ const CommentItem = ({comment}) => {
                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                         title="February 8th, 2022">Feb. 8, 2022</time></p>
             </div>
-        {auth.user._id === comment.userId && (
+            {myComment && (
+                 <button id="dropdownComment1Button" 
+                 class="inline-flex items-center text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                 type="button" onClick={handleDeleteProjectComment}>
+                <i class="fa-sharp fa-solid fa-trash text-danger"></i>
+                 
+             </button>
+         
+            ) }
+        {!myComment && auth.user._id === comment.userId && (
              <GenericPopover  content={<CommentPopoverContent comment={comment} handleDeleteProjectComment={handleDeleteProjectComment} />} >
              <button id="dropdownComment1Button" 
                  class="inline-flex items-center text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
