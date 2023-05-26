@@ -7,6 +7,7 @@ import movieReducer from "./reducers/MovieReducer";
 import bookReducer from "./reducers/BookReducer";
 import { authReducer } from "./reducers/AuthReducer";
 import commentReducer from "./reducers/CommentReducer";
+import userReducer from "./reducers/UserReducer";
 
 
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     blog : blogReducer,
     movie : movieReducer ,
     book : bookReducer,
-    comment : commentReducer
+    comment : commentReducer,
+    user : userReducer
  
 })
 
