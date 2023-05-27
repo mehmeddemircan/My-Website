@@ -48,7 +48,7 @@ exports.getUserGiveJobForms = catchAsyncErrors(async(req,res) => {
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
     
-        const totalGiveJobForms = await GiveJobForm.countDocuments();
+        const totalGiveJobForms = await GiveJobForm.find({user : req.params.userId}).countDocuments();
         const giveJobForms = await GiveJobForm.find({user : req.params.userId}).skip(startIndex).limit(limit);
     
         res.status(200).json({
