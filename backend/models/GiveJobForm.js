@@ -1,7 +1,11 @@
 //replace modelSchema,ModelName with whatever you want
 var mongoose = require('mongoose');
-
+const {ObjectId} = mongoose.Schema
 var giveJobFormSchema = new mongoose.Schema({
+    user : {
+        type : ObjectId ,
+        ref : 'User'
+    },
     firstname : {
         type: String,
         required : true 
@@ -23,13 +27,11 @@ var giveJobFormSchema = new mongoose.Schema({
         required : true 
     },
     city : {
-        type : String,
-        required : true 
+        type : String
     },
 
     additionalInfo: {
-        type: String,
-        required : true 
+        type: String
     },
 },{timestamps : true });
 
