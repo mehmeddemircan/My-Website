@@ -1,8 +1,14 @@
 //replace modelSchema,ModelName with whatever you want
 var mongoose = require("mongoose");
-
+const {ObjectId} = mongoose.Schema
 var teamFormSchema = new mongoose.Schema(
   {
+    user : {
+      type : ObjectId,
+      ref : 'User',
+
+    },
+
     firstname: {
       type: String,
       required: true,
