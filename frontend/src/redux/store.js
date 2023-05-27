@@ -8,6 +8,7 @@ import bookReducer from "./reducers/BookReducer";
 import { authReducer } from "./reducers/AuthReducer";
 import commentReducer from "./reducers/CommentReducer";
 import userReducer from "./reducers/UserReducer";
+import formReducer from "./reducers/FormReducer";
 
 
 
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     movie : movieReducer ,
     book : bookReducer,
     comment : commentReducer,
-    user : userReducer
+    user : userReducer,
+    form : formReducer
  
 })
 
