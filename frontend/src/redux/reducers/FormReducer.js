@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { DELETE_MY_GIVE_JOB_FORMS_FAIL, DELETE_MY_GIVE_JOB_FORMS_REQUEST, DELETE_MY_GIVE_JOB_FORMS_RESET, DELETE_MY_GIVE_JOB_FORMS_SUCCESS, GET_CITIES_FAIL, GET_CITIES_REQUEST, GET_CITIES_SUCCESS, GET_MY_GIVE_JOB_FORMS_FAIL, GET_MY_GIVE_JOB_FORMS_REQUEST, GET_MY_GIVE_JOB_FORMS_SUCCESS, SEND_GIVE_JOB_FORM_FAIL, SEND_GIVE_JOB_FORM_REQUEST, SEND_GIVE_JOB_FORM_RESET, SEND_GIVE_JOB_FORM_SUCCESS, UPDATE_MY_GIVE_JOB_FORMS_FAIL, UPDATE_MY_GIVE_JOB_FORMS_REQUEST, UPDATE_MY_GIVE_JOB_FORMS_RESET, UPDATE_MY_GIVE_JOB_FORMS_SUCCESS } from "../constants/FormConstants";
+import { DELETE_FORM_FAIL, DELETE_FORM_REQUEST, DELETE_FORM_RESET, DELETE_FORM_SUCCESS, GET_CITIES_FAIL, GET_CITIES_REQUEST, GET_CITIES_SUCCESS, GET_FORMS_FAIL, GET_FORMS_REQUEST, GET_FORMS_SUCCESS, GET_MY_GIVE_JOB_FORMS_FAIL, GET_MY_GIVE_JOB_FORMS_REQUEST, GET_MY_GIVE_JOB_FORMS_SUCCESS, GET_MY_TEAM_FORMS_FAIL, GET_MY_TEAM_FORMS_REQUEST, GET_MY_TEAM_FORMS_SUCCESS, SEND_FORM_FAIL, SEND_FORM_REQUEST, SEND_FORM_RESET, SEND_FORM_SUCCESS, UPDATE_FORM_FAIL, UPDATE_FORM_REQUEST, UPDATE_FORM_RESET, UPDATE_FORM_SUCCESS } from "../constants/FormConstants";
 
 
 const GET_CITIES_INITIAL_STATE = {
@@ -35,15 +35,15 @@ const GET_CITIES_INITIAL_STATE = {
   };
 
  
-  export const sendGiveJobFormReducer = (
+  export const sendFormReducer = (
     state = {message : ""},
     action
   ) => {
     switch (action.type) {
-      case SEND_GIVE_JOB_FORM_REQUEST:
+      case SEND_FORM_REQUEST:
         return { ...state, loading: true };
   
-      case SEND_GIVE_JOB_FORM_SUCCESS:
+      case SEND_FORM_SUCCESS:
         return {
           ...state,
           loading: false,
@@ -51,14 +51,14 @@ const GET_CITIES_INITIAL_STATE = {
           message : action.payload.message
         };
   
-      case SEND_GIVE_JOB_FORM_FAIL:
+      case SEND_FORM_FAIL:
         return {
           ...state,
           loading: false,
           success: false,
           error: action.payload,
         };
-      case SEND_GIVE_JOB_FORM_RESET : 
+      case SEND_FORM_RESET : 
         return {
             ...state,
             success : false 
@@ -69,7 +69,7 @@ const GET_CITIES_INITIAL_STATE = {
   };
 
   export const getUserGiveJobFormsReducer = (
-    state = { giveJobForms : []},
+    state = { forms : []},
     action
   ) => {
     switch (action.type) {
@@ -81,7 +81,7 @@ const GET_CITIES_INITIAL_STATE = {
           ...state,
           loading: false,
           success: true,
-             giveJobForms : action.payload.results
+             forms : action.payload.results
         };
   
       case GET_MY_GIVE_JOB_FORMS_FAIL:
@@ -97,16 +97,16 @@ const GET_CITIES_INITIAL_STATE = {
     }
   };
 
-  export const deleteUpdateUserGiveJobFormsReducer = (
+  export const deleteUpdateUserFormsReducer = (
     state = { message : ""},
     action
   ) => {
     switch (action.type) {
-      case DELETE_MY_GIVE_JOB_FORMS_REQUEST:
-      case UPDATE_MY_GIVE_JOB_FORMS_REQUEST : 
+      case DELETE_FORM_REQUEST:
+      case UPDATE_FORM_REQUEST : 
         return { ...state, loading: true };
   
-      case DELETE_MY_GIVE_JOB_FORMS_SUCCESS:
+      case DELETE_FORM_SUCCESS:
         return {
           ...state,
           loading: false,
@@ -114,7 +114,7 @@ const GET_CITIES_INITIAL_STATE = {
             message : action.payload.message
         };
   
-        case UPDATE_MY_GIVE_JOB_FORMS_SUCCESS:
+        case UPDATE_FORM_SUCCESS:
             return {
               ...state,
               loading: false,
@@ -122,26 +122,26 @@ const GET_CITIES_INITIAL_STATE = {
                 message : action.payload.message
             };
       
-      case DELETE_MY_GIVE_JOB_FORMS_FAIL:
+      case DELETE_FORM_FAIL:
         return {
           ...state,
           loading: false,
           isDeleted: false,
           error: action.payload,
         };
-        case UPDATE_MY_GIVE_JOB_FORMS_FAIL:
+        case UPDATE_FORM_FAIL:
             return {
               ...state,
               loading: false,
               isUpdated: false,
               error: action.payload,
             };
-      case DELETE_MY_GIVE_JOB_FORMS_RESET : 
+      case DELETE_FORM_RESET : 
         return {
             ...state,
             isDeleted : false 
         }
-        case UPDATE_MY_GIVE_JOB_FORMS_RESET : 
+        case UPDATE_FORM_RESET : 
         return {
             ...state,
             isUpdated : false 
@@ -154,12 +154,40 @@ const GET_CITIES_INITIAL_STATE = {
   };
 
 
-
+  export const getUserTeamFormsReducer = (
+    state = { forms : []},
+    action
+  ) => {
+    switch (action.type) {
+      case GET_MY_TEAM_FORMS_REQUEST:
+        return { ...state, loading: true };
+  
+      case GET_MY_TEAM_FORMS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          success: true,
+             forms : action.payload.results
+        };
+  
+      case GET_MY_TEAM_FORMS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          success: false,
+          error: action.payload,
+        };
+      
+      default:
+        return state;
+    }
+  };
   const formReducer = combineReducers({
     getCities : getCitiesReducer,
-    sendGiveJobForm : sendGiveJobFormReducer,
+    sendForm : sendFormReducer,
     getUserGiveJobForms : getUserGiveJobFormsReducer,
-    deleteUpdateUserGiveJobForms : deleteUpdateUserGiveJobFormsReducer
+    deleteUpdateUserForms : deleteUpdateUserFormsReducer,
+    getUserTeamForms : getUserTeamFormsReducer
   })
 
   export default formReducer

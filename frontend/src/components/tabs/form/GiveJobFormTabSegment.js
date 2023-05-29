@@ -4,20 +4,20 @@ import { DeleteUserGiveJobForms, GetCities, GetUserGiveJobForms } from '../../..
 import FormInfoCard from '../../cards/FormInfoCard'
 import EmptyResult from '../../result/EmptyResult'
 import { message } from 'antd'
-import { DELETE_MY_GIVE_JOB_FORMS_RESET } from '../../../redux/constants/FormConstants'
+import { DELETE_FORM_RESET } from '../../../redux/constants/FormConstants'
 import LoadingSpinner from '../../spinner/LoadingSpinner'
 
 const GiveJobFormTabSegment = () => {
     const auth = useSelector((state) => state.auth)
-    const deleteUpdateUserGiveJobForms = useSelector((state) => state.form.deleteUpdateUserGiveJobForms)
+    const deleteUpdateUserForms = useSelector((state) => state.form.deleteUpdateUserForms)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetUserGiveJobForms(auth.user._id))
-        if (deleteUpdateUserGiveJobForms.isDeleted) {
-            message.success(deleteUpdateUserGiveJobForms.message)
-            dispatch({type : DELETE_MY_GIVE_JOB_FORMS_RESET})
+        if (deleteUpdateUserForms.isDeleted) {
+            message.success(deleteUpdateUserForms.message)
+            dispatch({type : DELETE_FORM_RESET})
         }
-    }, [dispatch,auth,deleteUpdateUserGiveJobForms.isDeleted])
+    }, [dispatch,auth,deleteUpdateUserForms.isDeleted])
     
 
     const getUserGiveJobForms = useSelector((state) => state.form.getUserGiveJobForms)
@@ -33,8 +33,8 @@ const GiveJobFormTabSegment = () => {
   return (
     <Fragment>
      
-        {getUserGiveJobForms.loading ? <LoadingSpinner /> :  getUserGiveJobForms.giveJobForms.length === 0 ? <EmptyResult /> : getUserGiveJobForms.giveJobForms.map((form) => (
-            <FormInfoCard  handleDeleteGiveJobForm={handleDeleteGiveJobForm} key={form._id} form={form} />
+        {getUserGiveJobForms.loading ? <LoadingSpinner /> :  getUserGiveJobForms.forms.length === 0 ? <EmptyResult /> : getUserGiveJobForms.forms.map((form) => (
+            <FormInfoCard  isGiveJobForm={true} handleDeleteGiveJobForm={handleDeleteGiveJobForm} key={form._id} form={form} />
         ))}
     </Fragment>
   ) 

@@ -2,6 +2,7 @@ import React from 'react'
 import MainLayout from '../layouts/MainLayout';
 import GenericTabs from '../components/tabs/GenericTabs';
 import GiveJobFormTabSegment from '../components/tabs/form/GiveJobFormTabSegment';
+import TeamFormTabSegment from '../components/tabs/form/TeamFormTabSegment';
 
 const MyFormsPage = () => {
     const tabs = [
@@ -9,7 +10,7 @@ const MyFormsPage = () => {
           key: '1',
           title: 'Ekibe Katıl',
           component: (
-            <h2>hello sorular</h2>
+            <TeamFormTabSegment />
           ),
         },
         {

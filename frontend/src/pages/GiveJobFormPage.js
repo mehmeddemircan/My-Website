@@ -6,9 +6,10 @@ import SuccessResult from "../components/result/SuccessResult";
 import { Rate, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { GetCities, SendGiveJobForm } from "../redux/actions/FormActions";
-import { SEND_GIVE_JOB_FORM_RESET } from "../redux/constants/FormConstants";
+import { SEND_FORM_RESET } from "../redux/constants/FormConstants";
 import FormButton from "../components/button/FormButton";
 import { useNavigate } from "react-router-dom";
+import GenericFormTitle from "../components/forms/formtitle/GenericFormTitle";
 
 const GiveJobFormPage = () => {
   const dispatch = useDispatch();
@@ -46,10 +47,10 @@ const GiveJobFormPage = () => {
       })
     );
   };
-  const sendGiveJobForm = useSelector((state) => state.form.sendGiveJobForm);
+  const sendForm = useSelector((state) => state.form.sendForm);
 
   const handleSendAnotherForm = () => {
-    dispatch({ type: SEND_GIVE_JOB_FORM_RESET });
+    dispatch({ type: SEND_FORM_RESET });
     setFirstname("")
     setLastname("")
     setCompanyName("")
@@ -61,7 +62,7 @@ const GiveJobFormPage = () => {
   const navigate = useNavigate();
   return (
     <MainLayout>
-      {sendGiveJobForm.success ? (
+      {sendForm.success ? (
         <SuccessResult
           buttonComp={
             <div className="d-flex flex-row  justify-between gap-x-10">
@@ -79,13 +80,7 @@ const GiveJobFormPage = () => {
         />
       ) : (
         <Fragment>
-
-<div className="mx-auto max-w-2xl text-center mt-3">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">İş Teklif Formu</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-         İş Teklifinde bulunarak , kendi önemli gördüğünüz işleri yaptırabilirsiniz
-        </p>
-      </div>
+          <GenericFormTitle title="İş Teklif Formu" content="İş Teklifinde bulunarak , kendi önemli gördüğünüz işleri yaptırabilirsiniz" />
       <GiveJobForm
           isEditForm = {false}
           user={user}
