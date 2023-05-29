@@ -25,7 +25,7 @@ var teamFormSchema = new mongoose.Schema(
       type: String
 
     },
-    department: [
+    departments: [
       {
         type: String,
         required: true,
