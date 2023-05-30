@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../redux/actions/AuthActions";
+import { GoogleSignOut, logout } from "../../redux/actions/AuthActions";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -101,7 +101,12 @@ export const LoggedInSegment = () => {
   const navigate = useNavigate();
   // çıkış yapma işlemi
   const LogoutHandler = () => {
-    dispatch(logout());
+    if (auth.googleAuth) {
+      dispatch(GoogleSignOut())
+    }
+    else{
+      dispatch(logout());
+    }
   };
   const auth = useSelector((state) => state.auth);
   return (
@@ -128,8 +133,8 @@ export const LoggedInSegment = () => {
             <div className="p-4">
               <div class="flex flex-1 justify-between items-center">
                 <a className="font-semibold text-lg text-start">
-                  {auth.user.firstname}
-                  <a className="ms-2">{auth.user.lastname}</a>
+                  {auth.googleAuth  ? auth.user?.displayName :  auth.user?.firstname  } 
+                  <a className="ms-2">{auth.user?.lastname}</a>
                 </a>
                 <button className="btn btn-dark rounded-pill" onClick={() => navigate('/my-profile', {replace : true })}>Profilim</button>
               </div>
@@ -211,7 +216,7 @@ export const LoggedInSegment = () => {
                 </div>
                 <div className="flex-auto">
                   <a
-                    onClick={LogoutHandler}
+                    onClick={ LogoutHandler}
                     className="block font-semibold text-gray-900"
                   >
                     Çıkış Yap

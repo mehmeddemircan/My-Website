@@ -4,20 +4,20 @@ import { DeleteUserGiveJobForms, GetCities, GetUserGiveJobForms } from '../../..
 import FormInfoCard from '../../cards/FormInfoCard'
 import EmptyResult from '../../result/EmptyResult'
 import { message } from 'antd'
-import { DELETE_FORM_RESET } from '../../../redux/constants/FormConstants'
+import { DELETE_FORM_RESET, DELETE_GIVE_JOB_FORM_RESET } from '../../../redux/constants/FormConstants'
 import LoadingSpinner from '../../spinner/LoadingSpinner'
 
 const GiveJobFormTabSegment = () => {
     const auth = useSelector((state) => state.auth)
-    const deleteUpdateUserForms = useSelector((state) => state.form.deleteUpdateUserForms)
+    const deleteUpdateUserGiveJobForms = useSelector((state) => state.form.deleteUpdateUserGiveJobForms)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetUserGiveJobForms(auth.user._id))
-        if (deleteUpdateUserForms.isDeleted) {
-            message.success(deleteUpdateUserForms.message)
-            dispatch({type : DELETE_FORM_RESET})
+        if (deleteUpdateUserGiveJobForms.isDeleted) {
+            message.success(deleteUpdateUserGiveJobForms.message)
+            dispatch({type : DELETE_GIVE_JOB_FORM_RESET})
         }
-    }, [dispatch,auth,deleteUpdateUserForms.isDeleted])
+    }, [dispatch,auth,deleteUpdateUserGiveJobForms.isDeleted])
     
 
     const getUserGiveJobForms = useSelector((state) => state.form.getUserGiveJobForms)

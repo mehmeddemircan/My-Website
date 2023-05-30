@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout';
 import GenericTabs from '../components/tabs/GenericTabs';
 import GiveJobFormTabSegment from '../components/tabs/form/GiveJobFormTabSegment';
 import TeamFormTabSegment from '../components/tabs/form/TeamFormTabSegment';
+import ProjectIdeaFormTabSegment from '../components/tabs/form/ProjectIdeaFormTabSegment';
 
 const MyFormsPage = () => {
     const tabs = [
@@ -24,7 +25,7 @@ const MyFormsPage = () => {
           key: '3',
           title: 'Proje Fikir',
           component: (
-            <h2>ayarlar</h2>
+              <ProjectIdeaFormTabSegment />
           )
         },
       

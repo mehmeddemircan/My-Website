@@ -1,4 +1,4 @@
-import { IS_USER_LOGGED_IN_REQUEST, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST } from "../constants/AuthConstants";
+import { GOOGLE_AUTH_SUCCESS, IS_USER_LOGGED_IN_REQUEST, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_REQUEST, LOGOUT_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST } from "../constants/AuthConstants";
 
 const initialState = {
     token: null,
@@ -37,10 +37,24 @@ const initialState = {
           user: action.payload.user,
           token: action.payload.token,
           message : action.payload.message,
+          googleAuth : false ,
           authenticate: true,
           authenticating: false,
           loading : false
         };
+
+            
+      case GOOGLE_AUTH_SUCCESS:
+        return {
+          ...state,
+          user: action.payload,
+          googleAuth : true , 
+         
+          authenticate: true,
+          authenticating: false,
+          loading : false
+        };
+  
   
       case LOGIN_FAIL:
         return {

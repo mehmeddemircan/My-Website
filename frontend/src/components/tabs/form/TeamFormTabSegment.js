@@ -5,21 +5,21 @@ import FormInfoCard from '../../cards/FormInfoCard'
 import LoadingSpinner from '../../spinner/LoadingSpinner'
 import EmptyResult from '../../result/EmptyResult'
 import { message } from 'antd'
-import { DELETE_FORM_RESET } from '../../../redux/constants/FormConstants'
+import { DELETE_FORM_RESET, DELETE_TEAM_FORM_RESET } from '../../../redux/constants/FormConstants'
 
 const TeamFormTabSegment = () => {
 
     const dispatch = useDispatch()
     const getUserTeamForms = useSelector((state) => state.form.getUserTeamForms)
-    const deleteUpdateUserForms = useSelector((state) => state.form.deleteUpdateUserForms)
+    const deleteUpdateUserTeamForms = useSelector((state) => state.form.deleteUpdateUserTeamForms)
     const auth = useSelector((state) => state.auth)
     useEffect(() => {
         dispatch(GetUserTeamForms(auth.user._id))
-        if (deleteUpdateUserForms.isDeleted) {
-            message.success(deleteUpdateUserForms.message)
-            dispatch({type : DELETE_FORM_RESET})
+        if (deleteUpdateUserTeamForms.isDeleted) {
+            message.success(deleteUpdateUserTeamForms.message)
+            dispatch({type : DELETE_TEAM_FORM_RESET})
         }
-    }, [dispatch,auth,deleteUpdateUserForms.isDeleted])
+    }, [dispatch,auth,deleteUpdateUserTeamForms.isDeleted])
 
     const handleDeleteTeamForm = (formId) => {
         dispatch(DeleteUserTeamForms(formId))
