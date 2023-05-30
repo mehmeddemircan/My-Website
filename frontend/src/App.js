@@ -11,7 +11,7 @@ import GiveJobFormPage from "./pages/GiveJobFormPage";
 import JoinToTeamFormPage from "./pages/JoinToTeamFormPage";
 import AuthPage from "./pages/AuthPage";
 import { useDispatch, useSelector } from "react-redux";
-import { isUserLoggedIn } from "./redux/actions/AuthActions";
+import { GoogleAuthIsUserLoggedIn, isUserLoggedIn } from "./redux/actions/AuthActions";
 import { useEffect } from "react";
 import MoviesPage from "./pages/MoviesPage";
 import BooksPage from "./pages/BooksPage";
@@ -31,9 +31,17 @@ function App() {
   // When we fresh the page if you are in logged in  stay logged in
   useEffect(() => {
     if (!auth.authenticate) {
-      dispatch(isUserLoggedIn());
+      if (!auth.googleAuth) {
+        dispatch(isUserLoggedIn());
+      }
+      if (auth.googleAuth) {
+        dispatch(GoogleAuthIsUserLoggedIn());
+      }
+  
     }
-  }, [auth.authenticate]);
+ 
+ 
+  }, [dispatch,auth.authenticate,auth.googleAuth]);
 
   return (
     <Router>
