@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import GiveJobForm from "../forms/GiveJobForm";
 import JoinToTeamForm from "../forms/JoinToTeamForm";
 
-const FormInfoCard = ({ isGiveJobForm,isTeamForm,handleDeleteTeamForm,handleDeleteGiveJobForm, form }) => {
+const FormInfoCard = ({ isProjectIdea,isGiveJobForm,isTeamForm,handleDeleteTeamForm,handleDeleteGiveJobForm,handleDeleteProjectIdeaForm, form }) => {
 
 
   const [showUpdateFormModal, setShowUpdateFormModal] = useState(false);
@@ -105,7 +105,7 @@ const [departments, setDepartments] = useState(form.departments)
                 <Tooltip title="Delete">
                   <button
                     className="btn btn-light"
-                    onClick={() => isGiveJobForm ?  handleDeleteGiveJobForm(form._id) : isTeamForm ? handleDeleteTeamForm(form._id) : null}
+                    onClick={() => isGiveJobForm ?  handleDeleteGiveJobForm(form._id) : isTeamForm ? handleDeleteTeamForm(form._id) : isProjectIdea ? handleDeleteProjectIdeaForm(form._id) : null }
                   >
                     <i class="fa-solid fa-trash"></i>
                   </button>
