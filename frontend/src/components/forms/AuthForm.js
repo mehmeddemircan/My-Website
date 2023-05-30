@@ -1,7 +1,7 @@
 import React, { Fragment , useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Login, register as _register } from "../../redux/actions/AuthActions";
+import { Login, SignInGoogleFunc, register as _register } from "../../redux/actions/AuthActions";
 import { message } from "antd";
 
 const AuthForm = () => {
@@ -56,6 +56,11 @@ const AuthForm = () => {
       }
     }
   }, [auth.authenticating, auth.error, auth.token]);
+
+  const handleAuthWithGoogle = () => {
+    dispatch(SignInGoogleFunc())
+  }
+
   return (
     <Fragment>
     <section class="border-red-500 bg-gray-200 min-h-screen flex items-center justify-center">
@@ -103,7 +108,7 @@ const AuthForm = () => {
           <hr class="border-gray-500" />
         </div>
 
-        <button class="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 ">
+        <button onClick={handleAuthWithGoogle} class="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 ">
          
           <span class = "ml-4"> Login with Google</span>
         </button>
