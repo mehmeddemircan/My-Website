@@ -11,7 +11,7 @@ const LanguageModal = ({ showLanguageModal, handleCloseLanguageModal }) => {
   const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
 
   useEffect(() => {
-    console.log("Setting page stuff");
+
     document.body.dir = currentLanguage.dir || "ltr";
   }, [currentLanguage]);
 
