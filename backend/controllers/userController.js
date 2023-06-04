@@ -2,7 +2,7 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const User = require("../models/User");
 const sendToken = require("../utils/sendToken");
 const Comment = require("../models/Comment");
-
+const cloudinary = require('cloudinary')
 // kayıt olma işlemi
 exports.register = catchAsyncErrors(async (req, res, next) => {
   const { firstname, lastname, email, password } = req.body;
@@ -83,5 +83,47 @@ exports.getUserComments = catchAsyncErrors(async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Şu anki kullanicin profilini getir /api/profile/me
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// Private route, Kullanicin önce giriş yapacak şekilde hesabi güncelleme   => /api/profile/update
+exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.firstname = req.body.firstname || user.firstname;
+    user.lastname = req.body.lastname || user.lastname;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    // Fotograf oldugunu kontrol et
+    if (req.body.avatar) {
+      // resimi yükleme işlemi 
+      const result = await cloudinary.uploader.upload(req.body.avatar);
+      user.avatar.url = result.secure_url;
+      user.avatar.public_id = result.public_id;
+    }
+
+    const updatedUser = await user.save();
+
+    sendToken(updatedUser, 200, res, "Başarılı Şekilde profil güncellenmiştir");
+  } else {
+  
+    res.status(404).json({
+      success: false,
+      error: "Kullanıcı bulunamadı , güncelleme olmadı ",
+    });
   }
 });
