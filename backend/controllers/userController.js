@@ -105,6 +105,11 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     user.firstname = req.body.firstname || user.firstname;
     user.lastname = req.body.lastname || user.lastname;
     user.email = req.body.email || user.email;
+    user.status = req.body.status || user.status ; 
+    user.company = req.body.company || user.company ;
+    user.biografy = req.body.biografy || user.biografy ; 
+    user.city  = req.body.city || user.city ; 
+  
     if (req.body.password) {
       user.password = req.body.password;
     }
