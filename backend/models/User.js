@@ -29,6 +29,26 @@ var userSchema = new mongoose.Schema({
           type: String,
         },
     },
+    status : {
+        type : String,
+        default : ""
+        
+    },
+    company : {
+        type : String,
+        default : ""
+        
+    },
+    biografy :  {
+      type : String,
+      default : ""
+    },
+    city : {
+        type : String,
+        default : ""
+    },
+
+
     comments : [
         {
             type : ObjectId,
