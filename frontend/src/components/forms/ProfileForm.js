@@ -1,8 +1,16 @@
-import { Card } from "antd";
+import { Card, Upload } from "antd";
 import React, { Fragment } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
+import ImgCrop from "antd-img-crop";
+import { SendOutlined, CameraFilled } from "@ant-design/icons";
 const ProfileForm = ({
+  avatar,
+  setAvatar,
+  imageLength,
+  setImageLength,
+  uploadProps,
+  onPreview,
   company,
   setCompany,
   biografy,
@@ -203,18 +211,28 @@ const ProfileForm = ({
                   >
                     Photo
                   </label>
-                  <div className="mt-2 flex items-center gap-x-3">
-                    <UserCircleIcon
-                      className="h-12 w-12 text-gray-300"
-                      aria-hidden="true"
-                    />
-                    <button
-                      type="button"
-                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                          {getProfile.success&& (
+                              <div className="mt-2 flex items-center gap-x-3">
+                 
+              
+                              <ImgCrop>
+                                   <Upload
+                                   
+                      {...uploadProps}
+                     
+                      defaultFileList={getProfile.user && getProfile.user.avatar  ? [{ url: getProfile.user.avatar.url, name: "avatar" }] : []}
+                      onPreview={onPreview}
+                      onRemove={() => {
+                        setAvatar("");
+                        setImageLength(0);
+                      }}
+                      listType="picture-card"
                     >
-                      Change
-                    </button>
-                  </div>
+                        {avatar=== ""  && <CameraFilled style={{ fontSize: 30 }} />}
+                    </Upload>
+                  </ImgCrop>
+                            </div>
+                          )}
                 </div>
 
                 <div className="col-span-full">
