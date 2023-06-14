@@ -31,12 +31,12 @@ const ProfileSidebar = () => {
           
             </li>
             <hr />
-            <li class="flex items-center">
+            {/* <li class="flex items-center">
             <i class="fa-brands fa-instagram me-2"></i>
             <a href="https://www.instagram.com/mehmetcya_">mehmetcya_</a>
           
             </li>
-            <hr />
+            <hr /> */}
             <li class="flex items-center">
             <i class="fa-brands fa-linkedin me-2"></i>
             <a href="https://www.linkedin.com/in/mehmet-demircan-815ba51b3/">mehmet-demircan-815ba51b3</a>
